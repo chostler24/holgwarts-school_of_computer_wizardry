@@ -1,0 +1,1604 @@
+.w-layout-grid {
+  display: -ms-grid;
+  display: grid;
+  grid-auto-columns: 1fr;
+  -ms-grid-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  -ms-grid-rows: auto auto;
+  grid-template-rows: auto auto;
+  grid-row-gap: 16px;
+  grid-column-gap: 16px;
+}
+
+body {
+  font-family: Montserrat, sans-serif;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+h1 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-family: 'Magicschoolone ovyz', sans-serif;
+  color: #000;
+  font-size: 10vh;
+  line-height: 10vh;
+  font-weight: 700;
+  text-align: center;
+}
+
+h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  -ms-grid-row-align: auto;
+      align-self: auto;
+  font-family: 'Magicschoolone ovyz', sans-serif;
+  color: #000;
+  font-size: 4vh;
+  line-height: 4vh;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+}
+
+h3 {
+  margin-top: 10px;
+  margin-bottom: 25px;
+  color: #6b6b6b;
+  font-size: 24px;
+  line-height: 40px;
+  font-weight: 400;
+}
+
+h4 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+h6 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: bold;
+}
+
+p {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  color: #000;
+  font-size: 16px;
+  line-height: 30px;
+}
+
+a {
+  color: #000;
+  text-decoration: underline;
+}
+
+img {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.section {
+  display: -ms-grid;
+  display: grid;
+  width: auto;
+  height: 100vh;
+  margin: 3vh 3vw;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+  align-content: space-around;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  grid-column-gap: 3vh;
+  grid-row-gap: 3vh;
+      grid-template-areas: ".";
+  -ms-grid-columns: 1fr;
+  grid-template-columns: 1fr;
+  -ms-grid-rows: auto;
+  grid-template-rows: auto;
+  background-color: transparent;
+  opacity: 1;
+}
+
+.button {
+  display: inline-block;
+  margin-right: 0px;
+  padding: 20px 40px;
+  border-radius: 20px;
+  background-color: #fcdc04;
+  opacity: 1;
+  transition: background-color 500ms cubic-bezier(.789, .159, .25, 1), color 200ms cubic-bezier(.789, .159, .25, 1);
+  color: #000;
+  font-size: 16px;
+  line-height: 26px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.button:hover {
+  background-color: #fff;
+  color: #6b6b6b;
+}
+
+.navbar {
+  display: flex;
+  width: 100%;
+  height: 10vh;
+  padding-right: 24px;
+  padding-left: 24px;
+  justify-content: center;
+  align-items: center;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.4);
+  background-color: #f5bd6e;
+  box-shadow: 0 20px 20px -5px rgba(0, 0, 0, 0.2);
+}
+
+.navbarcontainer {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  justify-content: center;
+  align-items: center;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.navbar-content {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  display: flex;
+  width: 25vw;
+  height: 10vh;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 0 auto;
+  grid-column-gap: 1vw;
+  grid-row-gap: 0px;
+}
+
+.logo {
+  position: static;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  max-width: 4vw;
+  padding-top: 0px;
+  justify-content: center;
+  align-items: center;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.navbar-menu {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex: 0 auto;
+  grid-column-gap: 32px;
+  grid-row-gap: 32px;
+}
+
+.navbar-link {
+  display: flex;
+  padding: 24px 12px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex: 0 auto;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  opacity: 1;
+}
+
+.navbar-button {
+  display: flex;
+  padding: 8px 20px;
+  justify-content: center;
+  align-items: center;
+  flex: 0 auto;
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  background-color: #000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.hero-stack {
+  display: flex;
+  width: 100vw;
+  height: 90vh;
+  padding: 5vh 0px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0 auto;
+  grid-column-gap: 2vh;
+  grid-row-gap: 2vh;
+  border: 1px none #000;
+  border-radius: 0px 0px 25px 25px;
+  background-color: rgba(255, 234, 178, 0.77);
+  line-height: 20px;
+  background-clip: border-box;
+  -webkit-text-fill-color: inherit;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
+.hero-stack.background-transparent {
+  height: 90vh;
+  background-color: rgba(255, 234, 178, 0);
+}
+
+.card {
+  display: flex;
+  width: 65%;
+  height: 65vh;
+  padding: 3vh 7vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-column-gap: 1vh;
+  grid-row-gap: 1vh;
+  border: 1px none #000;
+  border-radius: 20px;
+  background-color: hsla(0, 0%, 100%, 0.85);
+  box-shadow: 8px 18px 20px 8px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  font-size: 12px;
+}
+
+.title-section {
+  display: flex;
+  width: 100%;
+  margin-bottom: 3vh;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  grid-column-gap: 24px;
+  grid-row-gap: 24px;
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+  padding: 64px 24px 8px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+  background-color: #f5bd6e;
+}
+
+.columns {
+  display: flex;
+  width: 100%;
+  max-width: 960px;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.column {
+  display: flex;
+  width: 100%;
+  max-width: 320px;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  grid-column-gap: 24px;
+  grid-row-gap: 24px;
+}
+
+.logo-wrapper {
+  display: flex;
+  padding-top: 16px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex: 0 auto;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.small-columns {
+  display: flex;
+  width: 100%;
+  max-width: 600px;
+  padding-top: 16px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  grid-column-gap: 32px;
+  grid-row-gap: 32px;
+}
+
+.column-content {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
+}
+
+.footer-links {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+}
+
+.link {
+  color: #212121;
+  font-size: 14px;
+  line-height: 150%;
+  font-weight: 400;
+}
+
+.copyright {
+  display: flex;
+  width: 100%;
+  max-width: 940px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  justify-content: center;
+  align-items: center;
+  grid-column-gap: 32px;
+  grid-row-gap: 32px;
+  box-shadow: 0px -1px 0px #e4ebf3;
+}
+
+.text-light {
+  color: #fff;
+}
+
+.utility-page-wrap {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  max-height: 100%;
+  max-width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.utility-page-content {
+  display: flex;
+  width: 260px;
+  flex-direction: column;
+  text-align: center;
+}
+
+.utility-page-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.body {
+  background-image: url('../images/hogwarts-school.jpg');
+  background-position: 0px 0px;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.slider {
+  display: block;
+  height: 65vh;
+  margin-right: 0px;
+  margin-left: 0px;
+  border-radius: 20px;
+  background-color: hsla(0, 0%, 86.7%, 0);
+  box-shadow: 9px 18px 20px 8px rgba(0, 0, 0, 0.2);
+}
+
+.slider.mobile-only {
+  display: none;
+}
+
+.slide {
+  background-image: url('../images/10.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 100%;
+     object-position: 50% 100%;
+}
+
+.slide-2 {
+  background-image: url('../images/14.png');
+  background-position: 50% 50%;
+  background-size: cover;
+}
+
+.slide-3 {
+  background-image: url('../images/1.png');
+  background-position: 50% 20%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.slide-nav {
+  display: none;
+}
+
+.grid {
+  overflow: hidden;
+  height: 100%;
+  justify-content: space-around;
+  justify-items: stretch;
+  -ms-grid-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: auto auto auto;
+  grid-template-rows: auto auto auto;
+}
+
+.grid.grid-hero {
+  position: static;
+  left: auto;
+  top: 0%;
+  right: 0%;
+  bottom: 0%;
+  z-index: -1;
+  overflow: visible;
+  height: auto;
+  max-width: 70vw;
+  padding: 2% 1%;
+  align-items: stretch;
+  align-content: stretch;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  -ms-grid-rows: auto auto;
+  grid-template-rows: auto auto;
+}
+
+.grid-image {
+  position: relative;
+  width: 95%;
+  height: 95%;
+  max-width: 15vw;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.slide-campus-1 {
+  background-image: url('../images/4.png');
+  background-position: 50% 0%;
+  background-size: cover;
+}
+
+.slide-campus-2 {
+  background-image: url('../images/6.png');
+  background-position: 50% 0%;
+  background-size: cover;
+}
+
+.slide-campus-3 {
+  background-image: url('../images/5.png');
+  background-position: 50% 0%;
+  background-size: cover;
+}
+
+.body-2 {
+  background-color: #ffeab2;
+  background-image: url('../images/14.png');
+  background-position: 50% 0%;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.header-container {
+  margin-top: 6vh;
+}
+
+.background-parchment {
+  position: relative;
+  z-index: -2;
+  background-color: rgba(255, 234, 178, 0.64);
+}
+
+.page-header {
+  display: flex;
+  width: 100vw;
+  height: 90vh;
+  padding: 5vh 0px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0 auto;
+  grid-column-gap: 2vh;
+  grid-row-gap: 2vh;
+  border: 1px none #000;
+  border-radius: 0px 0px 25px 25px;
+  background-color: rgba(255, 234, 178, 0.77);
+  line-height: 20px;
+  background-clip: border-box;
+  -webkit-text-fill-color: inherit;
+  -o-object-fit: fill;
+     object-fit: fill;
+}
+
+.page-header.background-transparent {
+  overflow: visible;
+  height: 90vh;
+  padding-top: 0vh;
+  padding-bottom: 0vh;
+  justify-content: space-between;
+  background-color: rgba(255, 234, 178, 0);
+}
+
+.div-block {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.lightbox-link {
+  position: static;
+}
+
+.grid-landing {
+  overflow: visible;
+  height: 100%;
+  justify-content: space-around;
+  justify-items: stretch;
+  -ms-grid-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  -ms-grid-rows: auto auto auto;
+  grid-template-rows: auto auto auto;
+}
+
+.form-block {
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.section-form {
+  display: -ms-grid;
+  display: grid;
+  width: auto;
+  height: auto;
+  margin: 3vh 3vw;
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+  align-content: space-around;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  grid-column-gap: 3vh;
+  grid-row-gap: 3vh;
+      grid-template-areas: ".";
+  -ms-grid-columns: 1fr;
+  grid-template-columns: 1fr;
+  -ms-grid-rows: auto;
+  grid-template-rows: auto;
+  background-color: transparent;
+  opacity: 1;
+}
+
+.logo-heading {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  text-decoration: none;
+}
+
+.link-block {
+  text-decoration: none;
+}
+
+.logo-flexbox {
+  text-align: center;
+}
+
+@media screen and (max-width: 991px) {
+  h2 {
+    font-size: 34px;
+    line-height: 44px;
+  }
+
+  h3 {
+    font-size: 20px;
+    line-height: 32px;
+  }
+
+  .section {
+    display: flex;
+    height: 100vh;
+    margin-top: 0px;
+    margin-right: 0vw;
+    margin-left: 0vw;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    flex-direction: column;
+    justify-content: space-around;
+    grid-auto-flow: row;
+    grid-auto-columns: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+    -ms-grid-rows: auto auto auto;
+    grid-template-rows: auto auto auto;
+  }
+
+  .navbar {
+    padding-right: 0;
+  }
+
+  .navbar-content {
+    justify-content: center;
+  }
+
+  .navbar-brand {
+    width: 75vw;
+    justify-content: center;
+  }
+
+  .logo {
+    max-width: 10vw;
+  }
+
+  .navbar-menu {
+    max-width: unset;
+  }
+
+  .navbar-link {
+    justify-content: center;
+  }
+
+  .navbar-button {
+    justify-content: center;
+  }
+
+  .hero-stack.background-transparent {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    justify-content: space-around;
+  }
+
+  .card {
+    width: 75%;
+    height: 75vh;
+    flex-direction: column;
+    order: 0;
+  }
+
+  .footer {
+    padding-top: 10px;
+  }
+
+  .footer-columns {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .column {
+    align-items: center;
+  }
+
+  .column-content {
+    align-items: center;
+  }
+
+  .footer-links {
+    align-items: center;
+  }
+
+  .slider {
+    display: block;
+    width: 75%;
+  }
+
+  .slider.mobile-only {
+    display: block;
+    background-color: hsla(0, 0%, 86.7%, 0);
+  }
+
+  .slide {
+    background-position: 50% 50%;
+    background-size: cover;
+  }
+
+  .slide-2 {
+    background-position: 50% 50%;
+  }
+
+  .slide-3 {
+    background-image: url('../images/1.png');
+    background-position: 50% 50%;
+  }
+
+  .grid {
+    display: none;
+  }
+
+  .grid.grid-hero {
+    display: -ms-grid;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    -ms-grid-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    -ms-grid-rows: auto auto auto;
+    grid-template-rows: auto auto auto;
+  }
+
+  .grid-image {
+    max-width: none;
+  }
+
+  .page-header.background-transparent {
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    justify-content: space-around;
+  }
+
+  .div-block {
+    justify-content: space-around;
+    grid-column-gap: 1vw;
+  }
+
+  .slide-course-1 {
+    background-image: url('../images/1_1.png');
+    background-position: 50% 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .slide-course-2 {
+    background-image: url('../images/2.png');
+    background-position: 50% 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .slide-course-3 {
+    background-image: url('../images/1_1.png');
+    background-position: 50% 50%;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  .left-arrow {
+    display: none;
+  }
+
+  .right-arrow {
+    display: none;
+  }
+
+  .grid-landing {
+    display: none;
+  }
+
+  .section-form {
+    display: flex;
+    height: 100vh;
+    margin-top: 0px;
+    margin-right: 0vw;
+    margin-left: 0vw;
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    flex-direction: column;
+    justify-content: space-around;
+    grid-auto-flow: row;
+    grid-auto-columns: 1fr;
+    grid-column-gap: 16px;
+    grid-row-gap: 16px;
+    -ms-grid-columns: 1fr;
+    grid-template-columns: 1fr;
+    -ms-grid-rows: auto auto auto;
+    grid-template-rows: auto auto auto;
+  }
+
+  .logo-flexbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-column-gap: 1vh;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  h2 {
+    font-size: 28px;
+    line-height: 38px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  h1 {
+    font-size: 60px;
+    line-height: 70px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  .section {
+    position: static;
+    overflow: visible;
+    background-image: none;
+    -o-object-fit: fill;
+       object-fit: fill;
+  }
+
+  .logo {
+    max-width: 25vw;
+  }
+
+  .hero-stack.background-transparent {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    justify-content: center;
+  }
+
+  .card {
+    height: 75vh;
+  }
+
+  .footer {
+    padding-top: 33px;
+  }
+
+  .small-columns {
+    flex-wrap: wrap;
+  }
+
+  .grid.grid-hero {
+    width: 100vw;
+    justify-content: space-around;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    flex: 1;
+    -ms-grid-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    -ms-grid-rows: auto auto auto auto;
+    grid-template-rows: auto auto auto auto;
+  }
+
+  .grid-image {
+    max-width: none;
+  }
+
+  .header-container {
+    margin-top: 0vh;
+  }
+
+  .page-header.background-transparent {
+    padding-top: 6vh;
+    padding-bottom: 6vh;
+    justify-content: space-between;
+  }
+
+  .section-form {
+    position: static;
+    overflow: visible;
+    background-image: none;
+    -o-object-fit: fill;
+       object-fit: fill;
+  }
+}
+
+#w-node-_7645791f-7a0e-8cff-21d7-451db50a4c17-0f6f2efc {
+  -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-bdd84c51-dbc2-8aa3-900d-426127f2a417-0f6f2efc {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+  order: 9999;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-cef5bcec-74b2-5a0a-3011-58f4d4da028b-0f6f2efc {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-e870b3f4-9eb2-15e0-c561-1bf4639c6d33-0f6f2efc {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_60897ecd-da8c-5fbe-139a-28cf949e0743-0f6f2efc {
+  -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_0377de53-b49c-4832-12bf-ac0c5c52da23-0f6f2efc {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+}
+
+#w-node-_0377de53-b49c-4832-12bf-ac0c5c52da24-0f6f2efc {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_0377de53-b49c-4832-12bf-ac0c5c52da26-0f6f2efc {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_0377de53-b49c-4832-12bf-ac0c5c52da2b-0f6f2efc {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_9da14ef7-ec50-783d-9c8d-ad223d6d56d5-0f6f2efc {
+  -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+#w-node-_54152495-af32-b77d-9018-ff8c8eab192c-0f6f2efc {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_0bcbb1a6-c814-aaec-4b03-ed1a338db4e1-0f6f2efc {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_6ad94b01-e1bd-73cd-b859-de6c35db918a-0f6f2efc {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_4c73e427-57fd-1337-2b1b-acf6badfd202-0f6f2efc {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_280949d2-5533-d8b7-9c3a-96282a139b59-0f6f2efc {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_51cca5bc-4b55-e0ef-a868-548565d23a65-0f6f2efc {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_6458dcfe-3953-c0a5-f48d-97e50b623c8d-0f6f2efc {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-b8d316e2-e237-f88a-9d6f-49bd86a46ad2-0f6f2efc {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_30e73be8-e087-2595-67a8-78039d4a16c1-0f6f2efc {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_22b1a8d3-23b1-1a07-c817-a338b0b14d4c-0f6f2efc {
+  -ms-grid-row-align: center;
+      align-self: center;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_22b1a8d3-23b1-1a07-c817-a338b0b14d56-0f6f2efc {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+  order: 9999;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_22b1a8d3-23b1-1a07-c817-a338b0b14d57-0f6f2efc {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_22b1a8d3-23b1-1a07-c817-a338b0b14d59-0f6f2efc {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_22b1a8d3-23b1-1a07-c817-a338b0b14d5d-0f6f2efc {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c34-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c35-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c36-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c37-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c38-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c39-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c3a-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c3b-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c3c-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c3d-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c3e-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c3f-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c40-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c41-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c42-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_3d32151b-ec6a-1d47-4903-0815ee8d3c43-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-fde08d30-4548-cad9-141b-efb49897aa6f-86690ef7 {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+  order: 9999;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-fde08d30-4548-cad9-141b-efb49897aa70-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_5e1ac6e3-9319-85fe-8b60-abe7d8774c71-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-fde08d30-4548-cad9-141b-efb49897aa72-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_36f64795-d0c1-818a-a7e0-3cf9739aaf56-86690ef7 {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+  order: 9999;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_36f64795-d0c1-818a-a7e0-3cf9739aaf58-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_9dab872f-ad9e-e873-3d75-38fe9ec82c7c-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_36f64795-d0c1-818a-a7e0-3cf9739aaf5b-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_7cb94ad0-78a4-c1e1-3bd7-19becc4837ea-86690ef7 {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+  order: 9999;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_7cb94ad0-78a4-c1e1-3bd7-19becc4837ec-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_2cc6a045-b491-6ef5-958b-dfe33cc810d9-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_7cb94ad0-78a4-c1e1-3bd7-19becc4837ef-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_86467504-492d-fa67-3965-cb38f3e333c7-86690ef7 {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+  order: 9999;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_86467504-492d-fa67-3965-cb38f3e333c9-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_9ad25300-c8f2-d435-072e-fea9ea2f9a5e-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_86467504-492d-fa67-3965-cb38f3e333cc-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_6550b575-5435-7390-6eea-c56915d86184-86690ef7 {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+  order: 9999;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_6550b575-5435-7390-6eea-c56915d86186-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_36541446-1a32-6b40-ca19-f56c70199c65-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_6550b575-5435-7390-6eea-c56915d86189-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_74a82a02-234e-ae76-ceff-6e2d41b336d9-86690ef7 {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+  order: 9999;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_74a82a02-234e-ae76-ceff-6e2d41b336db-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_79fd61c4-a656-7e3b-a849-e7894d6e36cd-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_74a82a02-234e-ae76-ceff-6e2d41b336de-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-e37a27ab-f591-1641-568c-6a38490d2b12-86690ef7 {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+  order: 9999;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-e37a27ab-f591-1641-568c-6a38490d2b14-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_34934e93-2ce9-7222-c2eb-3ffa55ccb83e-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-e37a27ab-f591-1641-568c-6a38490d2b17-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_0283ee10-a380-de13-f57e-d9d3d4b2e1de-86690ef7 {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-grid-row-align: center;
+      align-self: center;
+  order: 9999;
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_0283ee10-a380-de13-f57e-d9d3d4b2e1e0-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+#w-node-_9cb11d1d-fa9f-b566-09ca-8260c0ecfdd4-86690ef7 {
+  -ms-grid-column: span 1;
+      grid-column-start: span 1;
+  -ms-grid-column-span: 1;
+  grid-column-end: span 1;
+  -ms-grid-row: span 1;
+      grid-row-start: span 1;
+  -ms-grid-row-span: 1;
+  grid-row-end: span 1;
+}
+
+#w-node-_0283ee10-a380-de13-f57e-d9d3d4b2e1e3-86690ef7 {
+  grid-area: Hogwarts-Text;
+}
+
+@font-face {
+  font-family: 'Harryp';
+  src: url('../fonts/HARRYP__.TTF') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Magicschoolone ovyz';
+  src: url('../fonts/MagicSchoolOne-ovYz.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
