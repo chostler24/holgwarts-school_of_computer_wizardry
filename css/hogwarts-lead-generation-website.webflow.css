@@ -169,7 +169,7 @@ img {
 .navbar-brand {
   display: flex;
   width: 25vw;
-  height: 10vh;
+  height: 15vh;
   justify-content: flex-start;
   align-items: center;
   flex: 0 auto;
@@ -614,7 +614,7 @@ img {
 }
 
 .logo-heading {
-  margin-top: 0px;
+  margin-top: 0.5vh;
   margin-bottom: 0px;
   text-decoration: none;
 }
@@ -672,7 +672,7 @@ img {
   }
 
   .logo {
-    max-width: 10vw;
+    max-width: 20vw;
   }
 
   .navbar-menu {
@@ -865,7 +865,7 @@ img {
   }
 
   .logo {
-    max-width: 25vw;
+    max-width: 40vw;
   }
 
   .hero-stack.background-transparent {
