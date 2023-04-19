@@ -94,7 +94,7 @@ img {
   display: grid;
   width: auto;
   height: 100vh;
-  /* margin: 3vh 3vw; */
+  margin: 0 3vw;
   padding-top: 3vh;
   padding-bottom: 3vh;
   justify-content: space-around;
