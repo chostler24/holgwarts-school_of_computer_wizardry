@@ -39,7 +39,7 @@ function getCookie(cname) {
 function showCheckbox() {
 	// Create popup with checkbox and label
 	var popup = document.createElement("div");
-	popup.innerHTML = '<label><input type="checkbox">I am not a muggle</label>';
+	popup.innerHTML = '<label><input type="checkbox"><img src="images/MuggleCheck.png"></label>';
 	popup.style.position = "fixed";
 	popup.style.top = "50%";
 	popup.style.left = "50%";
@@ -61,6 +61,8 @@ function showCheckbox() {
 
 
 function loadDOMElement() {
+	const body = document.querySelector('body');
+
 	document.body.style.visibility = "visible";
 	// Add lightbox to the document
 	const newElement = document.createElement("div");
@@ -94,9 +96,9 @@ function loadDOMElement() {
 		</div>
 	</div>`;
 	document.body.appendChild(newElement);
-	
+
 	// Add the Header and Footer to the document
-	
+
 	function loadHeaderAndFooter() {
 		var xhrHeader = new XMLHttpRequest();
 		xhrHeader.onreadystatechange = function () {
@@ -110,7 +112,7 @@ function loadDOMElement() {
 		};
 		xhrHeader.open("GET", "header.html", true);
 		xhrHeader.send();
-	
+
 		var xhrFooter = new XMLHttpRequest();
 		xhrFooter.onreadystatechange = function () {
 			if (this.readyState == 4 && this.status == 200) {
@@ -120,35 +122,35 @@ function loadDOMElement() {
 		xhrFooter.open("GET", "footer.html", true);
 		xhrFooter.send();
 	}
-	
+
 	loadHeaderAndFooter();
-	
+
 	function lightBoxInitializer() {
 		// Lightbox element assignment
 		const lightbox = document.getElementById('lightbox');
 		const close = document.getElementById('close');
-	
+
 		// Open the lightbox
 		function openLightbox() {
 			lightbox.style.display = 'block';
 			console.log('Open lightbox');
 		}
-	
+
 		// Close the lightbox
 		close.onclick = function () {
 			lightbox.style.display = 'none';
 		}
-	
+
 		// Close the lightbox if the user clicks outside of it
 		window.onclick = function (event) {
 			if (event.target == lightbox) {
 				lightbox.style.display = 'none';
 			}
 		}
-	
+
 		// Add event listener to nav button
 		const CTAs = document.querySelectorAll('.CTA');
-	
+
 		CTAs.forEach(function (CTA) {
 			CTA.addEventListener('click', openLightbox);
 		});
