@@ -16,6 +16,7 @@ body {
   font-size: clamp(1rem, 0.5vw + 1vw, 10px);
   line-height: clamp(1.2, 1.2 + 0.5vw, 1.5);
   text-align: center;
+  visibility: hidden;
 }
 
 h1 {
@@ -1654,4 +1655,24 @@ img {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+div#g-recaptcha {
+  display: none;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+
+.popup {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
