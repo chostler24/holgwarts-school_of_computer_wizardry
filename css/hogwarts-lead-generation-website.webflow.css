@@ -446,6 +446,29 @@ img {
   background-repeat: no-repeat;
 }
 
+.slide-campus-page {
+  background-image: url('../images/Dueling.png');
+  background-position: 50% 45%;
+  background-size: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: 50% 100%;
+     object-position: 50% 100%;
+}
+
+.slide-campus-page-2 {
+  background-image: url('../images/Quidditch.png');
+  background-position: 50% 30%;
+  background-size: cover;
+}
+
+.slide-campus-page-3 {
+  background-image: url('../images/Gobstones.png');
+  background-position: 50% 50%;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 .slide-nav {
   display: none;
 }
