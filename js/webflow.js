@@ -14232,462 +14232,462 @@
   });
 
   // shared/render/plugins/Form/webflow-forms.js
-  var require_webflow_forms = __commonJS({
-    "shared/render/plugins/Form/webflow-forms.js"(exports, module) {
-      var Webflow = require_webflow_lib();
-      Webflow.define("forms", module.exports = function($, _) {
-        var api = {};
-        var $doc = $(document);
-        var $forms;
-        var loc = window.location;
-        var retro = window.XDomainRequest && !window.atob;
-        var namespace = ".w-form";
-        var siteId;
-        var emailField = /e(-)?mail/i;
-        var emailValue = /^\S+@\S+$/;
-        var alert = window.alert;
-        var inApp = Webflow.env();
-        var listening;
-        var formUrl;
-        var signFileUrl;
-        var chimpRegex = /list-manage[1-9]?.com/i;
-        var disconnected = _.debounce(function() {
-          alert("Oops! This page has improperly configured forms. Please contact your website administrator to fix this issue.");
-        }, 100);
-        api.ready = api.design = api.preview = function() {
-          init();
-          if (!inApp && !listening) {
-            addListeners();
-          }
-        };
-        function init() {
-          siteId = $("html").attr("data-wf-site");
-          formUrl = "https://webflow.com/api/v1/form/" + siteId;
-          if (retro && formUrl.indexOf("https://webflow.com") >= 0) {
-            formUrl = formUrl.replace("https://webflow.com", "https://formdata.webflow.com");
-          }
-          signFileUrl = `${formUrl}/signFile`;
-          $forms = $(namespace + " form");
-          if (!$forms.length) {
-            return;
-          }
-          $forms.each(build);
-        }
-        function build(i, el) {
-          var $el = $(el);
-          var data = $.data(el, namespace);
-          if (!data) {
-            data = $.data(el, namespace, {
-              form: $el
-            });
-          }
-          reset(data);
-          var wrap = $el.closest("div.w-form");
-          data.done = wrap.find("> .w-form-done");
-          data.fail = wrap.find("> .w-form-fail");
-          data.fileUploads = wrap.find(".w-file-upload");
-          data.fileUploads.each(function(j) {
-            initFileUpload(j, data);
-          });
-          var formName = data.form.attr("aria-label") || data.form.attr("data-name") || "Form";
-          if (!data.done.attr("aria-label")) {
-            data.form.attr("aria-label", formName);
-          }
-          data.done.attr("tabindex", "-1");
-          data.done.attr("role", "region");
-          if (!data.done.attr("aria-label")) {
-            data.done.attr("aria-label", formName + " success");
-          }
-          data.fail.attr("tabindex", "-1");
-          data.fail.attr("role", "region");
-          if (!data.fail.attr("aria-label")) {
-            data.fail.attr("aria-label", formName + " failure");
-          }
-          var action = data.action = $el.attr("action");
-          data.handler = null;
-          data.redirect = $el.attr("data-redirect");
-          if (chimpRegex.test(action)) {
-            data.handler = submitMailChimp;
-            return;
-          }
-          if (action) {
-            return;
-          }
-          if (siteId) {
-            data.handler = true ? exportedSubmitWebflow : (() => {
-              const hostedSubmitHandler = null.default;
-              return hostedSubmitHandler(reset, loc, Webflow, collectEnterpriseTrackingCookies, preventDefault, findFields, alert, findFileUploads, disableBtn, siteId, afterSubmit, $, formUrl);
-            })();
-            return;
-          }
-          disconnected();
-        }
-        function addListeners() {
-          listening = true;
-          $doc.on("submit", namespace + " form", function(evt) {
-            var data = $.data(this, namespace);
-            if (data.handler) {
-              data.evt = evt;
-              data.handler(data);
-            }
-          });
-          const CHECKBOX_CLASS_NAME = ".w-checkbox-input";
-          const RADIO_INPUT_CLASS_NAME = ".w-radio-input";
-          const CHECKED_CLASS = "w--redirected-checked";
-          const FOCUSED_CLASS = "w--redirected-focus";
-          const FOCUSED_VISIBLE_CLASS = "w--redirected-focus-visible";
-          const focusVisibleSelectors = ":focus-visible, [data-wf-focus-visible]";
-          const CUSTOM_CONTROLS = [["checkbox", CHECKBOX_CLASS_NAME], ["radio", RADIO_INPUT_CLASS_NAME]];
-          $doc.on("change", namespace + ` form input[type="checkbox"]:not(` + CHECKBOX_CLASS_NAME + ")", (evt) => {
-            $(evt.target).siblings(CHECKBOX_CLASS_NAME).toggleClass(CHECKED_CLASS);
-          });
-          $doc.on("change", namespace + ` form input[type="radio"]`, (evt) => {
-            $(`input[name="${evt.target.name}"]:not(${CHECKBOX_CLASS_NAME})`).map((i, el) => $(el).siblings(RADIO_INPUT_CLASS_NAME).removeClass(CHECKED_CLASS));
-            const $target = $(evt.target);
-            if (!$target.hasClass("w-radio-input")) {
-              $target.siblings(RADIO_INPUT_CLASS_NAME).addClass(CHECKED_CLASS);
-            }
-          });
-          CUSTOM_CONTROLS.forEach(([controlType, customControlClassName]) => {
-            $doc.on("focus", namespace + ` form input[type="${controlType}"]:not(` + customControlClassName + ")", (evt) => {
-              $(evt.target).siblings(customControlClassName).addClass(FOCUSED_CLASS);
-              $(evt.target).filter(focusVisibleSelectors).siblings(customControlClassName).addClass(FOCUSED_VISIBLE_CLASS);
-            });
-            $doc.on("blur", namespace + ` form input[type="${controlType}"]:not(` + customControlClassName + ")", (evt) => {
-              $(evt.target).siblings(customControlClassName).removeClass(`${FOCUSED_CLASS} ${FOCUSED_VISIBLE_CLASS}`);
-            });
-          });
-        }
-        function reset(data) {
-          var btn = data.btn = data.form.find(':input[type="submit"]');
-          data.wait = data.btn.attr("data-wait") || null;
-          data.success = false;
-          btn.prop("disabled", false);
-          data.label && btn.val(data.label);
-        }
-        function disableBtn(data) {
-          var btn = data.btn;
-          var wait = data.wait;
-          btn.prop("disabled", true);
-          if (wait) {
-            data.label = btn.val();
-            btn.val(wait);
-          }
-        }
-        function findFields(form, result) {
-          var status = null;
-          result = result || {};
-          form.find(':input:not([type="submit"]):not([type="file"])').each(function(i, el) {
-            var field = $(el);
-            var type = field.attr("type");
-            var name = field.attr("data-name") || field.attr("name") || "Field " + (i + 1);
-            var value = field.val();
-            if (type === "checkbox") {
-              value = field.is(":checked");
-            } else if (type === "radio") {
-              if (result[name] === null || typeof result[name] === "string") {
-                return;
-              }
-              value = form.find('input[name="' + field.attr("name") + '"]:checked').val() || null;
-            }
-            if (typeof value === "string") {
-              value = $.trim(value);
-            }
-            result[name] = value;
-            status = status || getStatus(field, type, name, value);
-          });
-          return status;
-        }
-        function findFileUploads(form) {
-          var result = {};
-          form.find(':input[type="file"]').each(function(i, el) {
-            var field = $(el);
-            var name = field.attr("data-name") || field.attr("name") || "File " + (i + 1);
-            var value = field.attr("data-value");
-            if (typeof value === "string") {
-              value = $.trim(value);
-            }
-            result[name] = value;
-          });
-          return result;
-        }
-        const trackingCookieNameMap = {
-          _mkto_trk: "marketo"
-          // __hstc: 'hubspot',
-        };
-        function collectEnterpriseTrackingCookies() {
-          const cookies = document.cookie.split("; ").reduce(function(acc, cookie) {
-            const splitCookie = cookie.split("=");
-            const name = splitCookie[0];
-            if (name in trackingCookieNameMap) {
-              const mappedName = trackingCookieNameMap[name];
-              const value = splitCookie.slice(1).join("=");
-              acc[mappedName] = value;
-            }
-            return acc;
-          }, {});
-          return cookies;
-        }
-        function getStatus(field, type, name, value) {
-          var status = null;
-          if (type === "password") {
-            status = "Passwords cannot be submitted.";
-          } else if (field.attr("required")) {
-            if (!value) {
-              status = "Please fill out the required field: " + name;
-            } else if (emailField.test(field.attr("type"))) {
-              if (!emailValue.test(value)) {
-                status = "Please enter a valid email address for: " + name;
-              }
-            }
-          } else if (name === "g-recaptcha-response" && !value) {
-            status = "Please confirm you\u2019re not a robot.";
-          }
-          return status;
-        }
-        function exportedSubmitWebflow(data) {
-          preventDefault(data);
-          afterSubmit(data);
-        }
-        function submitMailChimp(data) {
-          reset(data);
-          var form = data.form;
-          var payload = {};
-          if (/^https/.test(loc.href) && !/^https/.test(data.action)) {
-            form.attr("method", "post");
-            return;
-          }
-          preventDefault(data);
-          var status = findFields(form, payload);
-          if (status) {
-            return alert(status);
-          }
-          disableBtn(data);
-          var fullName;
-          _.each(payload, function(value, key) {
-            if (emailField.test(key)) {
-              payload.EMAIL = value;
-            }
-            if (/^((full[ _-]?)?name)$/i.test(key)) {
-              fullName = value;
-            }
-            if (/^(first[ _-]?name)$/i.test(key)) {
-              payload.FNAME = value;
-            }
-            if (/^(last[ _-]?name)$/i.test(key)) {
-              payload.LNAME = value;
-            }
-          });
-          if (fullName && !payload.FNAME) {
-            fullName = fullName.split(" ");
-            payload.FNAME = fullName[0];
-            payload.LNAME = payload.LNAME || fullName[1];
-          }
-          var url = data.action.replace("/post?", "/post-json?") + "&c=?";
-          var userId = url.indexOf("u=") + 2;
-          userId = url.substring(userId, url.indexOf("&", userId));
-          var listId = url.indexOf("id=") + 3;
-          listId = url.substring(listId, url.indexOf("&", listId));
-          payload["b_" + userId + "_" + listId] = "";
-          $.ajax({
-            url,
-            data: payload,
-            dataType: "jsonp"
-          }).done(function(resp) {
-            data.success = resp.result === "success" || /already/.test(resp.msg);
-            if (!data.success) {
-              console.info("MailChimp error: " + resp.msg);
-            }
-            afterSubmit(data);
-          }).fail(function() {
-            afterSubmit(data);
-          });
-        }
-        function afterSubmit(data) {
-          var form = data.form;
-          var redirect = data.redirect;
-          var success = data.success;
-          if (success && redirect) {
-            Webflow.location(redirect);
-            return;
-          }
-          data.done.toggle(success);
-          data.fail.toggle(!success);
-          if (success) {
-            data.done.focus();
-          } else {
-            data.fail.focus();
-          }
-          form.toggle(!success);
-          reset(data);
-        }
-        function preventDefault(data) {
-          data.evt && data.evt.preventDefault();
-          data.evt = null;
-        }
-        function initFileUpload(i, form) {
-          if (!form.fileUploads || !form.fileUploads[i]) {
-            return;
-          }
-          var file;
-          var $el = $(form.fileUploads[i]);
-          var $defaultWrap = $el.find("> .w-file-upload-default");
-          var $uploadingWrap = $el.find("> .w-file-upload-uploading");
-          var $successWrap = $el.find("> .w-file-upload-success");
-          var $errorWrap = $el.find("> .w-file-upload-error");
-          var $input = $defaultWrap.find(".w-file-upload-input");
-          var $label = $defaultWrap.find(".w-file-upload-label");
-          var $labelChildren = $label.children();
-          var $errorMsgEl = $errorWrap.find(".w-file-upload-error-msg");
-          var $fileEl = $successWrap.find(".w-file-upload-file");
-          var $removeEl = $successWrap.find(".w-file-remove-link");
-          var $fileNameEl = $fileEl.find(".w-file-upload-file-name");
-          var sizeErrMsg = $errorMsgEl.attr("data-w-size-error");
-          var typeErrMsg = $errorMsgEl.attr("data-w-type-error");
-          var genericErrMsg = $errorMsgEl.attr("data-w-generic-error");
-          if (!inApp) {
-            $label.on("click keydown", function(e) {
-              if (e.type === "keydown" && e.which !== 13 && e.which !== 32) {
-                return;
-              }
-              e.preventDefault();
-              $input.click();
-            });
-          }
-          $label.find(".w-icon-file-upload-icon").attr("aria-hidden", "true");
-          $removeEl.find(".w-icon-file-upload-remove").attr("aria-hidden", "true");
-          if (!inApp) {
-            $removeEl.on("click keydown", function(e) {
-              if (e.type === "keydown") {
-                if (e.which !== 13 && e.which !== 32) {
-                  return;
-                }
-                e.preventDefault();
-              }
-              $input.removeAttr("data-value");
-              $input.val("");
-              $fileNameEl.html("");
-              $defaultWrap.toggle(true);
-              $successWrap.toggle(false);
-              $label.focus();
-            });
-            $input.on("change", function(e) {
-              file = e.target && e.target.files && e.target.files[0];
-              if (!file) {
-                return;
-              }
-              $defaultWrap.toggle(false);
-              $errorWrap.toggle(false);
-              $uploadingWrap.toggle(true);
-              $uploadingWrap.focus();
-              $fileNameEl.text(file.name);
-              if (!isUploading()) {
-                disableBtn(form);
-              }
-              form.fileUploads[i].uploading = true;
-              signFile(file, afterSign);
-            });
-            var height = $label.outerHeight();
-            $input.height(height);
-            $input.width(1);
-          } else {
-            $input.on("click", function(e) {
-              e.preventDefault();
-            });
-            $label.on("click", function(e) {
-              e.preventDefault();
-            });
-            $labelChildren.on("click", function(e) {
-              e.preventDefault();
-            });
-          }
-          function parseError(err) {
-            var errorMsg = err.responseJSON && err.responseJSON.msg;
-            var userError = genericErrMsg;
-            if (typeof errorMsg === "string" && errorMsg.indexOf("InvalidFileTypeError") === 0) {
-              userError = typeErrMsg;
-            } else if (typeof errorMsg === "string" && errorMsg.indexOf("MaxFileSizeError") === 0) {
-              userError = sizeErrMsg;
-            }
-            $errorMsgEl.text(userError);
-            $input.removeAttr("data-value");
-            $input.val("");
-            $uploadingWrap.toggle(false);
-            $defaultWrap.toggle(true);
-            $errorWrap.toggle(true);
-            $errorWrap.focus();
-            form.fileUploads[i].uploading = false;
-            if (!isUploading()) {
-              reset(form);
-            }
-          }
-          function afterSign(err, data) {
-            if (err) {
-              return parseError(err);
-            }
-            var fileName = data.fileName;
-            var postData = data.postData;
-            var fileId = data.fileId;
-            var s3Url = data.s3Url;
-            $input.attr("data-value", fileId);
-            uploadS3(s3Url, postData, file, fileName, afterUpload);
-          }
-          function afterUpload(err) {
-            if (err) {
-              return parseError(err);
-            }
-            $uploadingWrap.toggle(false);
-            $successWrap.css("display", "inline-block");
-            $successWrap.focus();
-            form.fileUploads[i].uploading = false;
-            if (!isUploading()) {
-              reset(form);
-            }
-          }
-          function isUploading() {
-            var uploads = form.fileUploads && form.fileUploads.toArray() || [];
-            return uploads.some(function(value) {
-              return value.uploading;
-            });
-          }
-        }
-        function signFile(file, cb) {
-          var payload = new URLSearchParams({
-            name: file.name,
-            size: file.size
-          });
-          $.ajax({
-            type: "GET",
-            url: `${signFileUrl}?${payload}`,
-            crossDomain: true
-          }).done(function(data) {
-            cb(null, data);
-          }).fail(function(err) {
-            cb(err);
-          });
-        }
-        function uploadS3(url, data, file, fileName, cb) {
-          var formData = new FormData();
-          for (var k in data) {
-            formData.append(k, data[k]);
-          }
-          formData.append("file", file, fileName);
-          $.ajax({
-            type: "POST",
-            url,
-            data: formData,
-            processData: false,
-            contentType: false
-          }).done(function() {
-            cb(null);
-          }).fail(function(err) {
-            cb(err);
-          });
-        }
-        return api;
-      });
-    }
-  });
+  // var require_webflow_forms = __commonJS({
+  //   "shared/render/plugins/Form/webflow-forms.js"(exports, module) {
+  //     var Webflow = require_webflow_lib();
+  //     Webflow.define("forms", module.exports = function($, _) {
+  //       var api = {};
+  //       var $doc = $(document);
+  //       var $forms;
+  //       var loc = window.location;
+  //       var retro = window.XDomainRequest && !window.atob;
+  //       var namespace = ".w-form";
+  //       var siteId;
+  //       var emailField = /e(-)?mail/i;
+  //       var emailValue = /^\S+@\S+$/;
+  //       var alert = window.alert;
+  //       var inApp = Webflow.env();
+  //       var listening;
+  //       var formUrl;
+  //       var signFileUrl;
+  //       var chimpRegex = /list-manage[1-9]?.com/i;
+  //       var disconnected = _.debounce(function() {
+  //         alert("Oops! This page has improperly configured forms. Please contact your website administrator to fix this issue.");
+  //       }, 100);
+  //       api.ready = api.design = api.preview = function() {
+  //         init();
+  //         if (!inApp && !listening) {
+  //           addListeners();
+  //         }
+  //       };
+  //       function init() {
+  //         siteId = $("html").attr("data-wf-site");
+  //         formUrl = "https://webflow.com/api/v1/form/" + siteId;
+  //         if (retro && formUrl.indexOf("https://webflow.com") >= 0) {
+  //           formUrl = formUrl.replace("https://webflow.com", "https://formdata.webflow.com");
+  //         }
+  //         signFileUrl = `${formUrl}/signFile`;
+  //         $forms = $(namespace + " form");
+  //         if (!$forms.length) {
+  //           return;
+  //         }
+  //         $forms.each(build);
+  //       }
+  //       function build(i, el) {
+  //         var $el = $(el);
+  //         var data = $.data(el, namespace);
+  //         if (!data) {
+  //           data = $.data(el, namespace, {
+  //             form: $el
+  //           });
+  //         }
+  //         reset(data);
+  //         var wrap = $el.closest("div.w-form");
+  //         data.done = wrap.find("> .w-form-done");
+  //         data.fail = wrap.find("> .w-form-fail");
+  //         data.fileUploads = wrap.find(".w-file-upload");
+  //         data.fileUploads.each(function(j) {
+  //           initFileUpload(j, data);
+  //         });
+  //         var formName = data.form.attr("aria-label") || data.form.attr("data-name") || "Form";
+  //         if (!data.done.attr("aria-label")) {
+  //           data.form.attr("aria-label", formName);
+  //         }
+  //         data.done.attr("tabindex", "-1");
+  //         data.done.attr("role", "region");
+  //         if (!data.done.attr("aria-label")) {
+  //           data.done.attr("aria-label", formName + " success");
+  //         }
+  //         data.fail.attr("tabindex", "-1");
+  //         data.fail.attr("role", "region");
+  //         if (!data.fail.attr("aria-label")) {
+  //           data.fail.attr("aria-label", formName + " failure");
+  //         }
+  //         var action = data.action = $el.attr("action");
+  //         data.handler = null;
+  //         data.redirect = $el.attr("data-redirect");
+  //         if (chimpRegex.test(action)) {
+  //           data.handler = submitMailChimp;
+  //           return;
+  //         }
+  //         if (action) {
+  //           return;
+  //         }
+  //         if (siteId) {
+  //           data.handler = true ? exportedSubmitWebflow : (() => {
+  //             const hostedSubmitHandler = null.default;
+  //             return hostedSubmitHandler(reset, loc, Webflow, collectEnterpriseTrackingCookies, preventDefault, findFields, alert, findFileUploads, disableBtn, siteId, afterSubmit, $, formUrl);
+  //           })();
+  //           return;
+  //         }
+  //         disconnected();
+  //       }
+  //       function addListeners() {
+  //         listening = true;
+  //         $doc.on("submit", namespace + " form", function(evt) {
+  //           var data = $.data(this, namespace);
+  //           if (data.handler) {
+  //             data.evt = evt;
+  //             data.handler(data);
+  //           }
+  //         });
+  //         const CHECKBOX_CLASS_NAME = ".w-checkbox-input";
+  //         const RADIO_INPUT_CLASS_NAME = ".w-radio-input";
+  //         const CHECKED_CLASS = "w--redirected-checked";
+  //         const FOCUSED_CLASS = "w--redirected-focus";
+  //         const FOCUSED_VISIBLE_CLASS = "w--redirected-focus-visible";
+  //         const focusVisibleSelectors = ":focus-visible, [data-wf-focus-visible]";
+  //         const CUSTOM_CONTROLS = [["checkbox", CHECKBOX_CLASS_NAME], ["radio", RADIO_INPUT_CLASS_NAME]];
+  //         $doc.on("change", namespace + ` form input[type="checkbox"]:not(` + CHECKBOX_CLASS_NAME + ")", (evt) => {
+  //           $(evt.target).siblings(CHECKBOX_CLASS_NAME).toggleClass(CHECKED_CLASS);
+  //         });
+  //         $doc.on("change", namespace + ` form input[type="radio"]`, (evt) => {
+  //           $(`input[name="${evt.target.name}"]:not(${CHECKBOX_CLASS_NAME})`).map((i, el) => $(el).siblings(RADIO_INPUT_CLASS_NAME).removeClass(CHECKED_CLASS));
+  //           const $target = $(evt.target);
+  //           if (!$target.hasClass("w-radio-input")) {
+  //             $target.siblings(RADIO_INPUT_CLASS_NAME).addClass(CHECKED_CLASS);
+  //           }
+  //         });
+  //         CUSTOM_CONTROLS.forEach(([controlType, customControlClassName]) => {
+  //           $doc.on("focus", namespace + ` form input[type="${controlType}"]:not(` + customControlClassName + ")", (evt) => {
+  //             $(evt.target).siblings(customControlClassName).addClass(FOCUSED_CLASS);
+  //             $(evt.target).filter(focusVisibleSelectors).siblings(customControlClassName).addClass(FOCUSED_VISIBLE_CLASS);
+  //           });
+  //           $doc.on("blur", namespace + ` form input[type="${controlType}"]:not(` + customControlClassName + ")", (evt) => {
+  //             $(evt.target).siblings(customControlClassName).removeClass(`${FOCUSED_CLASS} ${FOCUSED_VISIBLE_CLASS}`);
+  //           });
+  //         });
+  //       }
+  //       function reset(data) {
+  //         var btn = data.btn = data.form.find(':input[type="submit"]');
+  //         data.wait = data.btn.attr("data-wait") || null;
+  //         data.success = false;
+  //         btn.prop("disabled", false);
+  //         data.label && btn.val(data.label);
+  //       }
+  //       function disableBtn(data) {
+  //         var btn = data.btn;
+  //         var wait = data.wait;
+  //         btn.prop("disabled", true);
+  //         if (wait) {
+  //           data.label = btn.val();
+  //           btn.val(wait);
+  //         }
+  //       }
+  //       function findFields(form, result) {
+  //         var status = null;
+  //         result = result || {};
+  //         form.find(':input:not([type="submit"]):not([type="file"])').each(function(i, el) {
+  //           var field = $(el);
+  //           var type = field.attr("type");
+  //           var name = field.attr("data-name") || field.attr("name") || "Field " + (i + 1);
+  //           var value = field.val();
+  //           if (type === "checkbox") {
+  //             value = field.is(":checked");
+  //           } else if (type === "radio") {
+  //             if (result[name] === null || typeof result[name] === "string") {
+  //               return;
+  //             }
+  //             value = form.find('input[name="' + field.attr("name") + '"]:checked').val() || null;
+  //           }
+  //           if (typeof value === "string") {
+  //             value = $.trim(value);
+  //           }
+  //           result[name] = value;
+  //           status = status || getStatus(field, type, name, value);
+  //         });
+  //         return status;
+  //       }
+  //       function findFileUploads(form) {
+  //         var result = {};
+  //         form.find(':input[type="file"]').each(function(i, el) {
+  //           var field = $(el);
+  //           var name = field.attr("data-name") || field.attr("name") || "File " + (i + 1);
+  //           var value = field.attr("data-value");
+  //           if (typeof value === "string") {
+  //             value = $.trim(value);
+  //           }
+  //           result[name] = value;
+  //         });
+  //         return result;
+  //       }
+  //       const trackingCookieNameMap = {
+  //         _mkto_trk: "marketo"
+  //         // __hstc: 'hubspot',
+  //       };
+  //       function collectEnterpriseTrackingCookies() {
+  //         const cookies = document.cookie.split("; ").reduce(function(acc, cookie) {
+  //           const splitCookie = cookie.split("=");
+  //           const name = splitCookie[0];
+  //           if (name in trackingCookieNameMap) {
+  //             const mappedName = trackingCookieNameMap[name];
+  //             const value = splitCookie.slice(1).join("=");
+  //             acc[mappedName] = value;
+  //           }
+  //           return acc;
+  //         }, {});
+  //         return cookies;
+  //       }
+  //       function getStatus(field, type, name, value) {
+  //         var status = null;
+  //         if (type === "password") {
+  //           status = "Passwords cannot be submitted.";
+  //         } else if (field.attr("required")) {
+  //           if (!value) {
+  //             status = "Please fill out the required field: " + name;
+  //           } else if (emailField.test(field.attr("type"))) {
+  //             if (!emailValue.test(value)) {
+  //               status = "Please enter a valid email address for: " + name;
+  //             }
+  //           }
+  //         } else if (name === "g-recaptcha-response" && !value) {
+  //           status = "Please confirm you\u2019re not a robot.";
+  //         }
+  //         return status;
+  //       }
+  //       function exportedSubmitWebflow(data) {
+  //         preventDefault(data);
+  //         afterSubmit(data);
+  //       }
+  //       function submitMailChimp(data) {
+  //         reset(data);
+  //         var form = data.form;
+  //         var payload = {};
+  //         if (/^https/.test(loc.href) && !/^https/.test(data.action)) {
+  //           form.attr("method", "post");
+  //           return;
+  //         }
+  //         preventDefault(data);
+  //         var status = findFields(form, payload);
+  //         if (status) {
+  //           return alert(status);
+  //         }
+  //         disableBtn(data);
+  //         var fullName;
+  //         _.each(payload, function(value, key) {
+  //           if (emailField.test(key)) {
+  //             payload.EMAIL = value;
+  //           }
+  //           if (/^((full[ _-]?)?name)$/i.test(key)) {
+  //             fullName = value;
+  //           }
+  //           if (/^(first[ _-]?name)$/i.test(key)) {
+  //             payload.FNAME = value;
+  //           }
+  //           if (/^(last[ _-]?name)$/i.test(key)) {
+  //             payload.LNAME = value;
+  //           }
+  //         });
+  //         if (fullName && !payload.FNAME) {
+  //           fullName = fullName.split(" ");
+  //           payload.FNAME = fullName[0];
+  //           payload.LNAME = payload.LNAME || fullName[1];
+  //         }
+  //         var url = data.action.replace("/post?", "/post-json?") + "&c=?";
+  //         var userId = url.indexOf("u=") + 2;
+  //         userId = url.substring(userId, url.indexOf("&", userId));
+  //         var listId = url.indexOf("id=") + 3;
+  //         listId = url.substring(listId, url.indexOf("&", listId));
+  //         payload["b_" + userId + "_" + listId] = "";
+  //         $.ajax({
+  //           url,
+  //           data: payload,
+  //           dataType: "jsonp"
+  //         }).done(function(resp) {
+  //           data.success = resp.result === "success" || /already/.test(resp.msg);
+  //           if (!data.success) {
+  //             console.info("MailChimp error: " + resp.msg);
+  //           }
+  //           afterSubmit(data);
+  //         }).fail(function() {
+  //           afterSubmit(data);
+  //         });
+  //       }
+  //       function afterSubmit(data) {
+  //         var form = data.form;
+  //         var redirect = data.redirect;
+  //         var success = data.success;
+  //         if (success && redirect) {
+  //           Webflow.location(redirect);
+  //           return;
+  //         }
+  //         data.done.toggle(success);
+  //         data.fail.toggle(!success);
+  //         if (success) {
+  //           data.done.focus();
+  //         } else {
+  //           data.fail.focus();
+  //         }
+  //         form.toggle(!success);
+  //         reset(data);
+  //       }
+  //       function preventDefault(data) {
+  //         data.evt && data.evt.preventDefault();
+  //         data.evt = null;
+  //       }
+  //       function initFileUpload(i, form) {
+  //         if (!form.fileUploads || !form.fileUploads[i]) {
+  //           return;
+  //         }
+  //         var file;
+  //         var $el = $(form.fileUploads[i]);
+  //         var $defaultWrap = $el.find("> .w-file-upload-default");
+  //         var $uploadingWrap = $el.find("> .w-file-upload-uploading");
+  //         var $successWrap = $el.find("> .w-file-upload-success");
+  //         var $errorWrap = $el.find("> .w-file-upload-error");
+  //         var $input = $defaultWrap.find(".w-file-upload-input");
+  //         var $label = $defaultWrap.find(".w-file-upload-label");
+  //         var $labelChildren = $label.children();
+  //         var $errorMsgEl = $errorWrap.find(".w-file-upload-error-msg");
+  //         var $fileEl = $successWrap.find(".w-file-upload-file");
+  //         var $removeEl = $successWrap.find(".w-file-remove-link");
+  //         var $fileNameEl = $fileEl.find(".w-file-upload-file-name");
+  //         var sizeErrMsg = $errorMsgEl.attr("data-w-size-error");
+  //         var typeErrMsg = $errorMsgEl.attr("data-w-type-error");
+  //         var genericErrMsg = $errorMsgEl.attr("data-w-generic-error");
+  //         if (!inApp) {
+  //           $label.on("click keydown", function(e) {
+  //             if (e.type === "keydown" && e.which !== 13 && e.which !== 32) {
+  //               return;
+  //             }
+  //             e.preventDefault();
+  //             $input.click();
+  //           });
+  //         }
+  //         $label.find(".w-icon-file-upload-icon").attr("aria-hidden", "true");
+  //         $removeEl.find(".w-icon-file-upload-remove").attr("aria-hidden", "true");
+  //         if (!inApp) {
+  //           $removeEl.on("click keydown", function(e) {
+  //             if (e.type === "keydown") {
+  //               if (e.which !== 13 && e.which !== 32) {
+  //                 return;
+  //               }
+  //               e.preventDefault();
+  //             }
+  //             $input.removeAttr("data-value");
+  //             $input.val("");
+  //             $fileNameEl.html("");
+  //             $defaultWrap.toggle(true);
+  //             $successWrap.toggle(false);
+  //             $label.focus();
+  //           });
+  //           $input.on("change", function(e) {
+  //             file = e.target && e.target.files && e.target.files[0];
+  //             if (!file) {
+  //               return;
+  //             }
+  //             $defaultWrap.toggle(false);
+  //             $errorWrap.toggle(false);
+  //             $uploadingWrap.toggle(true);
+  //             $uploadingWrap.focus();
+  //             $fileNameEl.text(file.name);
+  //             if (!isUploading()) {
+  //               disableBtn(form);
+  //             }
+  //             form.fileUploads[i].uploading = true;
+  //             signFile(file, afterSign);
+  //           });
+  //           var height = $label.outerHeight();
+  //           $input.height(height);
+  //           $input.width(1);
+  //         } else {
+  //           $input.on("click", function(e) {
+  //             e.preventDefault();
+  //           });
+  //           $label.on("click", function(e) {
+  //             e.preventDefault();
+  //           });
+  //           $labelChildren.on("click", function(e) {
+  //             e.preventDefault();
+  //           });
+  //         }
+  //         function parseError(err) {
+  //           var errorMsg = err.responseJSON && err.responseJSON.msg;
+  //           var userError = genericErrMsg;
+  //           if (typeof errorMsg === "string" && errorMsg.indexOf("InvalidFileTypeError") === 0) {
+  //             userError = typeErrMsg;
+  //           } else if (typeof errorMsg === "string" && errorMsg.indexOf("MaxFileSizeError") === 0) {
+  //             userError = sizeErrMsg;
+  //           }
+  //           $errorMsgEl.text(userError);
+  //           $input.removeAttr("data-value");
+  //           $input.val("");
+  //           $uploadingWrap.toggle(false);
+  //           $defaultWrap.toggle(true);
+  //           $errorWrap.toggle(true);
+  //           $errorWrap.focus();
+  //           form.fileUploads[i].uploading = false;
+  //           if (!isUploading()) {
+  //             reset(form);
+  //           }
+  //         }
+  //         function afterSign(err, data) {
+  //           if (err) {
+  //             return parseError(err);
+  //           }
+  //           var fileName = data.fileName;
+  //           var postData = data.postData;
+  //           var fileId = data.fileId;
+  //           var s3Url = data.s3Url;
+  //           $input.attr("data-value", fileId);
+  //           uploadS3(s3Url, postData, file, fileName, afterUpload);
+  //         }
+  //         function afterUpload(err) {
+  //           if (err) {
+  //             return parseError(err);
+  //           }
+  //           $uploadingWrap.toggle(false);
+  //           $successWrap.css("display", "inline-block");
+  //           $successWrap.focus();
+  //           form.fileUploads[i].uploading = false;
+  //           if (!isUploading()) {
+  //             reset(form);
+  //           }
+  //         }
+  //         function isUploading() {
+  //           var uploads = form.fileUploads && form.fileUploads.toArray() || [];
+  //           return uploads.some(function(value) {
+  //             return value.uploading;
+  //           });
+  //         }
+  //       }
+  //       function signFile(file, cb) {
+  //         var payload = new URLSearchParams({
+  //           name: file.name,
+  //           size: file.size
+  //         });
+  //         $.ajax({
+  //           type: "GET",
+  //           url: `${signFileUrl}?${payload}`,
+  //           crossDomain: true
+  //         }).done(function(data) {
+  //           cb(null, data);
+  //         }).fail(function(err) {
+  //           cb(err);
+  //         });
+  //       }
+  //       function uploadS3(url, data, file, fileName, cb) {
+  //         var formData = new FormData();
+  //         for (var k in data) {
+  //           formData.append(k, data[k]);
+  //         }
+  //         formData.append("file", file, fileName);
+  //         $.ajax({
+  //           type: "POST",
+  //           url,
+  //           data: formData,
+  //           processData: false,
+  //           contentType: false
+  //         }).done(function() {
+  //           cb(null);
+  //         }).fail(function(err) {
+  //           cb(err);
+  //         });
+  //       }
+  //       return api;
+  //     });
+  //   }
+  // });
 
   // <stdin>
   require_webflow_scroll();

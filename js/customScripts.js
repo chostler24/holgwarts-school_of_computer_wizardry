@@ -9,7 +9,7 @@ newElement.innerHTML = `<div id="lightbox-content">
 		<option value="">Select one...</option>
 		<option value="True">My Parents are Hogwarts Alum</option>
 		<option value="False">My Parents are not Hogwarts Alum</option>
-		</select><label for="email-3">Street Address (For Owl)</label><input type="email" class="w-input" maxlength="256" name="email-3" data-name="Email 3" placeholder="" id="email-3" required=""><label>House Preference</label><select id="House" name="House" data-name="House" class="w-select">
+		</select><label for="email-3">Street Address (For Owl)</label><input type="address" class="w-input" maxlength="256" name="email-3" data-name="Email 3" placeholder="" id="email-3" required=""><label>House Preference</label><select id="House" name="House" data-name="House" class="w-select">
 		<option value="">Select one...</option>
 		<option value="Gryffindor">Gryffindor</option>
 		<option value="Slytherin">Slytherin</option>
@@ -39,8 +39,8 @@ function loadHeaderAndFooter() {
 		if (this.readyState == 4 && this.status == 200) {
 			document.body.insertAdjacentHTML("afterbegin", this.responseText);
 			var scriptTag = document.createElement("script");
-    		scriptTag.src = "js/webflow.js";
-    		document.body.appendChild(scriptTag);
+			scriptTag.src = "js/webflow.js";
+			document.body.appendChild(scriptTag);
 			lightBoxInitializer();
 		}
 	};
@@ -88,4 +88,38 @@ function lightBoxInitializer() {
 	CTAs.forEach(function (CTA) {
 		CTA.addEventListener('click', openLightbox);
 	});
+}
+
+// 🍪
+function setCookie(cname, cvalue, exdays) {
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+	var expires = "expires=" + d.toUTCString();
+	document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+	var name = cname + "=";
+	var decodedCookie = decodeURIComponent(document.cookie);
+	var ca = decodedCookie.split(';');
+	for (var i = 0; i < ca.length; i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+
+var visited = getCookie("visited");
+if (visited != "true") {
+	setCookie("visited", "true", 30);
+	// Show the captcha here
+	
+	console.log("New Visitor!!!!!!!!");
+} else {
+	console.log("Old Visitor.")
 }
