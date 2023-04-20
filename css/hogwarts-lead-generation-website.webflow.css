@@ -91,6 +91,13 @@ img {
   z-index: 2;
 }
 
+.map-img {
+  flex: 1 0 50vw;
+  max-width: 100%;
+  height: auto;
+  z-index: 2;
+}
+
 .section {
   display: grid;
   width: auto;
@@ -566,6 +573,8 @@ img {
 
 div.header-container h1 {
   margin-right: 2vw;
+  display: flex;
+  flex-direction: column;
 }
 
 .background-parchment {
