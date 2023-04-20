@@ -96,13 +96,14 @@ img {
   max-width: 100%;
   height: auto;
   z-index: 2;
+  margin: 10vh 0;
 }
 
 .section {
   display: grid;
   width: auto;
   height: 100vh;
-  margin: 3vh 3vw;
+  margin: 0vh 3vw;
   padding-top: 3vh;
   padding-bottom: 3vh;
   justify-content: space-around;
@@ -569,6 +570,7 @@ img {
   display: flex;
   align-items: center;
   padding: 40px;
+  justify-content: space-around;
 }
 
 div.header-container h1 {
@@ -696,6 +698,11 @@ div.header-container h1 {
   h3 {
     font-size: 20px;
     line-height: 32px;
+  }
+
+  .header-container {
+    margin-top: 0vh;
+    flex-direction: column;
   }
 
   .link {
@@ -931,10 +938,6 @@ div.header-container h1 {
     justify-content: center;
   }
 
-  .card {
-    /* height: 75vh; */
-  }
-
   .footer {
     padding-top: 33px;
   }
@@ -963,6 +966,7 @@ div.header-container h1 {
 
   .header-container {
     margin-top: 0vh;
+    flex-direction: column;
   }
 
   .page-header.background-transparent {
