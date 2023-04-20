@@ -512,9 +512,9 @@ textarea.w-select {
   height: 20px;
 }
 .w-container {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 940px;
+  /* margin-left: auto;
+  margin-right: auto; */
+  /* max-width: 940px; */
 }
 .w-container:before,
 .w-container:after {
@@ -1622,9 +1622,10 @@ textarea.w-select {
   text-decoration: none;
   color: #222222;
   padding: 20px;
-  text-align: left;
+  text-align: center;
   margin-left: auto;
   margin-right: auto;
+  white-space: nowrap;
 }
 .w-nav-link.w--current {
   color: #0082f3;
@@ -1681,7 +1682,7 @@ textarea.w-select {
 .w-nav-button {
   position: relative;
   float: right;
-  padding: 18px;
+  /* padding: 18px; */
   font-size: 24px;
   display: none;
   cursor: pointer;
