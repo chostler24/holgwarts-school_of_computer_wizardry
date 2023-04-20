@@ -85,6 +85,7 @@ a {
 img {
   display: inline-block;
   max-width: 100%;
+  height: auto;
   z-index: 2;
 }
 
@@ -542,6 +543,13 @@ img {
 
 .header-container {
   margin-top: 6vh;
+  display: flex;
+  align-items: center;
+  padding: 40px;
+}
+
+div.header-container h1 {
+  margin-right: 2vw;
 }
 
 .background-parchment {
