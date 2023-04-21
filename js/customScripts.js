@@ -86,7 +86,7 @@ function loadDOMElement() {
 			<option value="False">Always</option>
 			<option value="False">Sometimes</option>
 			<option value="True">Never</option>
-			</select><input type="submit" value="Submit" data-wait="Please wait..." class="w-button"></form>
+			</select><input type="submit" value="Submit" data-wait="Please wait..." class="button"></form>
 		<div class="w-form-done">
 			<div>Thank you! Your submission has been received!</div>
 		</div>
