@@ -70,30 +70,41 @@ function loadDOMElement() {
 	newElement.innerHTML = `<div id="lightbox-content">
 		<span id="close">&times;</span>
 		<div class="form-block w-form">
-		<h2>Request Your Hogwarts Information Packet Today!</h2>
-		<form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form"><label for="name">Name</label><input type="text" class="w-input" maxlength="256" name="name-3" data-name="Name 3" placeholder="" id="name-3"><label>Legacy Status</label><select id="Alumni" name="Alumni" data-name="Alumni" class="w-select">
-			<option value="">Select one...</option>
-			<option value="True">My Parents are Hogwarts Alum</option>
-			<option value="False">My Parents are not Hogwarts Alum</option>
-			</select><label for="email-3">Street Address (For Owl)</label><input type="address" class="w-input" maxlength="256" name="email-3" data-name="Email 3" placeholder="" id="email-3" required=""><label>House Preference</label><select id="House" name="House" data-name="House" class="w-select">
-			<option value="">Select one...</option>
-			<option value="Gryffindor">Gryffindor</option>
-			<option value="Slytherin">Slytherin</option>
-			<option value="Hufflepuff">Hufflepuff</option>
-			<option value="Ravenclaw">Ravenclaw</option>
-			</select><label>When Should One Tickle a Sleeping Dragon?</label><select id="Dragon" name="Dragon" data-name="Dragon" class="w-select">
-			<option value="">Select one...</option>
-			<option value="False">Always</option>
-			<option value="False">Sometimes</option>
-			<option value="True">Never</option>
-			</select><input type="submit" value="Submit" data-wait="Please wait..." class="button"></form>
-		<div class="w-form-done">
-			<div>Thank you! Your submission has been received!</div>
-		</div>
-		<div class="w-form-fail">
-			<div>Oops! Something went wrong while submitting the form.</div>
-		</div>
-		</div>
+        <h2>Request Your Hogwarts Information Packet Today!</h2>
+        <form id="email-form-2" name="email-form-2" data-name="Email Form 2" method="get" class="form">
+          <label for="name-3a">Name</label>
+          <input type="text" class="w-input" maxlength="256" name="name-3a" data-name="Name 3" placeholder="" id="name-3a">
+          <label for="Alumnia">Legacy Status</label>
+          <select id="Alumnia" name="Alumnia" data-name="Alumni" class="w-select">
+            <option value="">Select one...</option>
+            <option value="True">My Parents are Hogwarts Alum</option>
+            <option value="False">My Parents are not Hogwarts Alum</option>
+          </select>
+          <label for="address-1a">Street Address (For Owl)</label>
+          <input type="text" class="w-input" maxlength="256" name="address-1a" placeholder="" id="address-1a" required="">
+          <label for="Housea">House Preference</label>
+          <select id="Housea" name="Housea" data-name="House" class="w-select">
+            <option value="">Select one...</option>
+            <option value="Gryffindor">Gryffindor</option>
+            <option value="Slytherin">Slytherin</option>
+            <option value="Hufflepuff">Hufflepuff</option>
+            <option value="Ravenclaw">Ravenclaw</option>
+          </select>
+          <label for="Dragona">When Should One Tickle a Sleeping Dragon?</label>
+          <select id="Dragona" name="Dragona" data-name="Dragon" class="w-select">
+            <option value="">Select one...</option>
+            <option value="False">Always</option>
+            <option value="False">Sometimes</option>
+            <option value="True">Never</option>
+          </select>
+          <input type="submit" value="Submit" data-wait="Please wait..." class="button"></form>
+        <div class="w-form-done">
+          <div>Thank you! Your submission has been received!</div>
+        </div>
+        <div class="w-form-fail">
+          <div>Oops! Something went wrong while submitting the form.</div>
+        </div>
+      </div>
 	</div>`;
 	document.body.appendChild(newElement);
 
